@@ -19,7 +19,7 @@ plugins:
   - mkdocs-jupyter
       # execute: false  # 先不在建站時執行筆記本
   - exclude:
-      glob: ['_*/**', '*_.md']
+      glob: ['_*/**', '*_.md', '**/*稿*.*']
 
 markdown_extensions:
   # 支援提示框

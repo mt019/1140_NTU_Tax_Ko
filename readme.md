@@ -1,4 +1,4 @@
 # readme
 
 - Run:
-  - `v`
+  - `bash scripts/jupyter_url.sh`
