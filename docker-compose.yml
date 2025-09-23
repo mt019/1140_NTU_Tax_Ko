@@ -12,7 +12,7 @@ services:
   jupyter:
     image: jupyter/datascience-notebook:latest
     volumes:
-      - ./notebooks:/home/jovyan/work
+      - ./:/home/jovyan/work
     ports:
       - "127.0.0.1:11416:8888"   # 本機11401 → 容器8888（Jupyter）
     command: start-notebook.sh --ServerApp.token='' --ServerApp.password=''
