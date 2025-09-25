@@ -10,8 +10,10 @@ RUN pip install --no-cache-dir \
     mkdocs-exclude \
     mkdocs-minify-plugin \
     mkdocs-git-revision-date-localized-plugin \
-    mdx_truly_sane_lists
-
+    mdx_truly_sane_lists \
+    openai \
+    tiktoken
+    
 # 裝完移除編譯工具，縮小體積
 RUN apk del .build-deps
 

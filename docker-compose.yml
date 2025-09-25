@@ -10,7 +10,9 @@ services:
       - "127.0.0.1:11415:8000" #修改端口
     command: serve -a 0.0.0.0:8000
   jupyter:
-    image: jupyter/datascience-notebook:latest
+    build: ./jupyter
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - ./:/home/jovyan/work
     ports:
