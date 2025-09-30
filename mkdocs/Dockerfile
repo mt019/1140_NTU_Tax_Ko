@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir \
     mkdocs-git-revision-date-localized-plugin \
     mdx_truly_sane_lists \
     openai \
-    tiktoken
+    jieba
     
 # 裝完移除編譯工具，縮小體積
 RUN apk del .build-deps
