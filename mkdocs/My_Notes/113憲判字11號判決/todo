@@ -1,0 +1,19 @@
+明日待辦清單：
+	1.	確認樣式檔副檔名
+	•	用終端機或 Finder 確認樣式檔案是否為 .docx。
+	•	若沒有副檔名，補上 .docx。
+	2.	測試 Pandoc 引用樣式檔
+	•	呼叫 export_to_docx(processed, word_output_path, reference_path)。
+	•	檢查輸出 Word 是否自動套用樣式。
+	3.	驗證 Markdown → DOCX 穩定性
+	•	測試含條列、表格、標題、粗體的段落。
+	•	確保無損壞、無多餘空行。
+	4.	測試 行尾空格清理 正確性
+	•	檢查清單項目間無多行空白。
+	•	檢查人工留白段落仍保留。
+	5.	選擇最終 Pandoc 參數組合
+	•	決定 -f markdown+pipe_tables+lists_without_preceding_blankline+hard_line_breaks 是否最穩。
+	•	可測試是否需補上 --reference-doc。
+	6.	記錄最終可重現流程
+	•	確定輸入 Markdown → 清理 → Pandoc → Word 輸出全自動。
+	•	另存為「docx_export_pipeline.md」以供未來複製。
