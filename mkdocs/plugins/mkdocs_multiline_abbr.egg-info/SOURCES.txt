@@ -1,0 +1,8 @@
+setup.py
+mkdocs_multiline_abbr.egg-info/PKG-INFO
+mkdocs_multiline_abbr.egg-info/SOURCES.txt
+mkdocs_multiline_abbr.egg-info/dependency_links.txt
+mkdocs_multiline_abbr.egg-info/entry_points.txt
+mkdocs_multiline_abbr.egg-info/top_level.txt
+multiline_abbr/__init__.py
+multiline_abbr/plugin.py

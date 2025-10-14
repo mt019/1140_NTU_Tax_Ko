@@ -1,3 +1,5 @@
+# mkdocs/Dockerfile
+
 FROM squidfunk/mkdocs-material:latest
 
 # 加入編譯工具（只為了建 wheel）
@@ -18,3 +20,8 @@ RUN pip install --no-cache-dir \
 RUN apk del .build-deps
 
 WORKDIR /docs
+
+
+# 加入本地插件並安裝
+COPY ./plugins /opt/local_plugins
+RUN pip install -e /opt/local_plugins

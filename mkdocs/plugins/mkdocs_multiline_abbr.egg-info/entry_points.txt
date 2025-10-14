@@ -1,0 +1,2 @@
+[mkdocs.plugins]
+multiline_abbr = multiline_abbr.plugin:MultilineAbbrPlugin

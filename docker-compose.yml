@@ -5,6 +5,7 @@ services:
     build: ./mkdocs
     volumes:
       - ./mkdocs:/docs
+      - ./mkdocs/plugins:/opt/mkplugins:ro
       - ./notebooks:/docs/My_Notes/notebooks:ro 
     ports:
       - "127.0.0.1:11415:8000" #修改端口
