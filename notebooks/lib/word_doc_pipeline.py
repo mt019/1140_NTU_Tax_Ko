@@ -50,6 +50,7 @@ __all__ = [
     "insert_table_of_contents",
     "update_docx_fields_with_word",
     "save_document",
+    "add_horizontal_rule",
 ]
 
 
@@ -148,7 +149,7 @@ def load_document(template_path: Optional[Path] = None, *, east_asia_font: Optio
 def insert_table_of_contents(
     doc: Document,
     title: Optional[str] = "目錄",
-    level_range: str = "1-3",
+    level_range: Optional[str] = None,
     heading_level: int = 1,
     *,
     east_asia_font: Optional[str] = DEFAULT_EAST_ASIA_FONT,
@@ -166,13 +167,30 @@ def insert_table_of_contents(
 
     paragraph = doc.add_paragraph()
     run = paragraph.add_run()
+    toc_range = level_range or "1-4"
     field = OxmlElement("w:fldSimple")
-    field.set(qn("w:instr"), f'TOC \\o "{level_range}" \\h \\z \\u')
+    field.set(qn("w:instr"), f'TOC \\o "{toc_range}" \\h \\z \\u')
     run._r.append(field)  # noqa: SLF001
     apply_run_font(run, east_asia_font=east_asia_font)
 
     if page_break_after:
         paragraph.add_run().add_break(WD_BREAK.PAGE)
+
+
+def add_horizontal_rule(doc: Document) -> None:
+    """
+    Insert a horizontal rule by applying a bottom border to an empty paragraph.
+    """
+    paragraph = doc.add_paragraph()
+    p_pr = paragraph._p.get_or_add_pPr()
+    p_bdr = OxmlElement("w:pBdr")
+    bottom = OxmlElement("w:bottom")
+    bottom.set(qn("w:val"), "single")
+    bottom.set(qn("w:sz"), "12")
+    bottom.set(qn("w:space"), "1")
+    bottom.set(qn("w:color"), "auto")
+    p_bdr.append(bottom)
+    p_pr.append(p_bdr)
 
 
 def save_document(doc: Document, output_path: Path, *, auto_update: bool = False, update_kwargs: Optional[dict] = None) -> Path:
