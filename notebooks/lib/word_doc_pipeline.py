@@ -39,6 +39,7 @@ from docx import Document
 from docx.enum.text import WD_BREAK
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+from docx.text.paragraph import Paragraph
 
 DEFAULT_EAST_ASIA_FONT: Optional[str] = None
 
@@ -154,18 +155,35 @@ def insert_table_of_contents(
     *,
     east_asia_font: Optional[str] = DEFAULT_EAST_ASIA_FONT,
     page_break_after: bool = True,
+    target_paragraph: Optional[Paragraph] = None,
 ) -> None:
     """
     Insert a Table of Contents field into the supplied document.
 
     Parameters mirror the configuration used inside the notebooks.
     """
-    if title:
-        heading = doc.add_heading(title, level=heading_level)
-        for run in heading.runs:
+    def _apply_font(paragraph) -> None:
+        for run in paragraph.runs:
             apply_run_font(run, east_asia_font=east_asia_font)
 
-    paragraph = doc.add_paragraph()
+    if title:
+        if target_paragraph is not None:
+            heading_para = target_paragraph.insert_paragraph_before(title)
+            style_name = f"Heading {heading_level}"
+            try:
+                heading_para.style = doc.styles[style_name]
+            except KeyError:
+                heading_para.style = doc.styles["Normal"]
+            _apply_font(heading_para)
+        else:
+            heading = doc.add_heading(title, level=heading_level)
+            _apply_font(heading)
+
+    if target_paragraph is not None:
+        paragraph = target_paragraph.insert_paragraph_before()
+    else:
+        paragraph = doc.add_paragraph()
+
     run = paragraph.add_run()
     toc_range = level_range or "1-4"
     field = OxmlElement("w:fldSimple")
