@@ -28,10 +28,14 @@ plugins:
         - zh
       prebuild_index: true
   - awesome-pages
+  # Notebook 顯示策略：
+  # 1) 完全不轉換/不顯示：保持 mkdocs-jupyter 註解 + 排除 notebooks/**。
+  # 2) 仍可轉換但不顯示於導覽：啟用 mkdocs-jupyter，並在 nav/awesome-pages 規則中隱藏。
   # - mkdocs-jupyter
       # execute: false  # 先不在建站時執行筆記本
   - multiline_abbr
   - exclude:
+      # 排除 notebooks/** 表示完全不轉換/不顯示 notebook
       glob: ['_*/**', '*_.md', '**/*稿*.*', 'includes/**', '**/*abbreviations.md', 'notebooks/**', 'jupyter/**']
 
 markdown_extensions:
