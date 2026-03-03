@@ -4,11 +4,79 @@
   {{ super() }}
   {% set page_title = (page and page.meta and page.meta.title) or (page and page.title) or config.site_name %}
   {% set page_desc = (page and page.meta and page.meta.description) or config.site_description %}
-  {% if page and page.meta and page.meta.keywords %}
-    <meta name="keywords" content="{{ page.meta.keywords }}" />
-  {% else %}
-    <meta name="keywords" content="柯格鐘, 台大柯格鐘, 柯老師稅法, 1141 柯老師稅法, 所得稅法, 稅法, 稅法筆記, 稅法逐字稿" />
+  {% set ns = namespace(keywords=[]) %}
+  {% set base_keywords = [
+    "柯格鐘", "台大柯格鐘", "柯老師稅法", "1141 柯老師稅法",
+    "所得稅法", "租稅法", "稅法", "稅法筆記", "稅法逐字稿",
+    "台大法律", "NTU Tax", "Tax Law Notes"
+  ] %}
+  {% for kw in base_keywords %}
+    {% if kw and kw not in ns.keywords %}
+      {% set ns.keywords = ns.keywords + [kw] %}
+    {% endif %}
+  {% endfor %}
+  {% if page_title and page_title not in ns.keywords %}
+    {% set ns.keywords = ns.keywords + [page_title] %}
   {% endif %}
+  {% if page and page.file and page.file.src_uri %}
+    {% set path_parts = page.file.src_uri.split('/') %}
+    {% if path_parts|length >= 2 %}
+      {% set course_name = path_parts[1] %}
+      {% set course_name_clean = course_name
+        | replace("課_", "")
+        | replace("_", " ")
+      %}
+      {% if course_name and course_name not in ns.keywords %}
+        {% set ns.keywords = ns.keywords + [course_name] %}
+      {% endif %}
+      {% if course_name_clean and course_name_clean not in ns.keywords %}
+        {% set ns.keywords = ns.keywords + [course_name_clean] %}
+      {% endif %}
+      {% if page_title and course_name_clean %}
+        {% set kw1 = "柯格鐘（" ~ course_name_clean ~ "）" ~ page_title %}
+        {% set kw2 = "柯格鐘（" ~ course_name_clean ~ "）" ~ page_title ~ "筆記" %}
+        {% if kw1 not in ns.keywords %}
+          {% set ns.keywords = ns.keywords + [kw1] %}
+        {% endif %}
+        {% if kw2 not in ns.keywords %}
+          {% set ns.keywords = ns.keywords + [kw2] %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    {% if path_parts|length >= 3 %}
+      {% set lesson_name = path_parts[-1]
+        | replace(".md", "")
+        | replace("_", " ")
+      %}
+      {% if lesson_name and lesson_name not in ns.keywords %}
+        {% set ns.keywords = ns.keywords + [lesson_name] %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+  {% set required_keywords = ["柯格鐘 稅法", "柯格鐘 台大"] %}
+  {% for kw in required_keywords %}
+    {% if kw not in ns.keywords %}
+      {% set ns.keywords = ns.keywords + [kw] %}
+    {% endif %}
+  {% endfor %}
+  {% if page and page.meta and page.meta.keywords %}
+    {% set manual_keywords = page.meta.keywords %}
+    {% if manual_keywords is string %}
+      {% for kw in manual_keywords.split(",") %}
+        {% set kw = kw | trim %}
+        {% if kw and kw not in ns.keywords %}
+          {% set ns.keywords = ns.keywords + [kw] %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% for kw in manual_keywords %}
+        {% if kw and kw not in ns.keywords %}
+          {% set ns.keywords = ns.keywords + [kw] %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  <meta name="keywords" content="{{ ns.keywords | join(', ') }}" />
   <meta name="description" content="{{ page_desc }}" />
   <meta name="google-site-verification" content="HgMTZnEFg_uS3jjPeDSxhbNBA6tsFU6jG7IkWxEW6P4" />
 
