@@ -28,6 +28,7 @@ plugins:
       lang:
         - zh
       prebuild_index: true
+  - heading_index
   - awesome-pages
   # Notebook 顯示策略：
   # 1) 完全不轉換/不顯示：保持 mkdocs-jupyter 註解 + 排除 notebooks/**。

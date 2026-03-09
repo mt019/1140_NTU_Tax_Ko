@@ -7,7 +7,8 @@ setup(
     include_package_data=True,
     entry_points={
         "mkdocs.plugins": [
-            "multiline_abbr = multiline_abbr.plugin:MultilineAbbrPlugin"
+            "multiline_abbr = multiline_abbr.plugin:MultilineAbbrPlugin",
+            "heading_index = heading_index.plugin:HeadingIndexPlugin",
         ]
     },
 )

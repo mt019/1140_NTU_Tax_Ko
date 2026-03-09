@@ -83,6 +83,8 @@
 
 (function () {
   const STORAGE_KEY = "md-nav-all-toc";
+  const HEADINGS_INDEX_URL = new URL("all-headings.json", document.currentScript.src).toString();
+  let headingsIndexPromise = null;
 
   function isEnabled() {
     return localStorage.getItem(STORAGE_KEY) === "1";
@@ -168,15 +170,28 @@
     }
   }
 
-  function extractH2Headings(doc) {
-    const container =
-      doc.querySelector(".md-content") ||
-      doc.querySelector("article") ||
-      doc;
-    return Array.from(container.querySelectorAll("h2[id]")).map((h) => ({
-      id: h.id,
-      text: h.textContent.trim(),
-    }));
+  function normalizePathname(href) {
+    try {
+      return new URL(href, location.origin).pathname;
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function getIndexKeysForLink(link) {
+    const pathname = normalizePathname(link.href);
+    if (!pathname) return [];
+    if (pathname === "/") return ["/", "/index.html"];
+    return pathname.endsWith("/") ? [pathname, `${pathname}index.html`] : [pathname];
+  }
+
+  async function loadHeadingsIndex() {
+    if (!headingsIndexPromise) {
+      headingsIndexPromise = fetch(HEADINGS_INDEX_URL, { credentials: "same-origin" })
+        .then((res) => (res.ok ? res.json() : {}))
+        .catch(() => ({}));
+    }
+    return headingsIndexPromise;
   }
 
   function buildInjectedNav(headings, pageHref) {
@@ -197,15 +212,6 @@
     });
     nav.appendChild(ul);
     return nav;
-  }
-
-  async function fetchHeadingsForLink(link) {
-    const href = link.href;
-    const res = await fetch(href, { credentials: "same-origin" });
-    if (!res.ok) return [];
-    const html = await res.text();
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return extractH2Headings(doc);
   }
 
   async function withConcurrency(items, limit, worker) {
@@ -233,16 +239,14 @@
     clearInjected();
     if (!isEnabled()) return;
 
+    const headingsIndex = await loadHeadingsIndex();
     const links = getPageLinks().filter((a) => !isCurrentPage(a));
     await withConcurrency(links, 4, async (link) => {
       const li = link.closest(".md-nav__item");
       if (!li || li.getAttribute("data-alltoc-injected") === "1") return;
-      let headings = [];
-      try {
-        headings = await fetchHeadingsForLink(link);
-      } catch (_) {
-        headings = [];
-      }
+      const headings = getIndexKeysForLink(link)
+        .map((key) => headingsIndex[key])
+        .find((value) => Array.isArray(value) && value.length) || [];
       if (!headings.length) return;
       const nav = buildInjectedNav(headings, link.href);
       li.appendChild(nav);

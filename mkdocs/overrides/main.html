@@ -4,10 +4,13 @@
   {{ super() }}
   {% set page_title = (page and page.meta and page.meta.title) or (page and page.title) or config.site_name %}
   {% set page_desc = (page and page.meta and page.meta.description) or config.site_description %}
+  {% set is_homepage = page and page.is_homepage %}
+  {% set social_title = page_title if is_homepage else page_title ~ " - " ~ config.site_name %}
+  {% set og_type = "website" if is_homepage else "article" %}
   {% set ns = namespace(keywords=[]) %}
   {% set base_keywords = [
-    "柯格鐘", "台大柯格鐘", "柯老師稅法", "1141 柯老師稅法",
-    "所得稅法", "租稅法", "稅法", "稅法筆記", "稅法逐字稿",
+    "柯格鐘", "台大柯格鐘", "柯老師稅法", "1121-1142 柯老師稅法",
+    "所得稅法", "租稅法", "稅捐規避", "稅法", "稅法筆記", "稅法逐字稿",
     "台大法律", "NTU Tax", "Tax Law Notes"
   ] %}
   {% for kw in base_keywords %}
@@ -78,17 +81,19 @@
   {% endif %}
   <meta name="keywords" content="{{ ns.keywords | join(', ') }}" />
   <meta name="description" content="{{ page_desc }}" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="google-site-verification" content="HgMTZnEFg_uS3jjPeDSxhbNBA6tsFU6jG7IkWxEW6P4" />
 
-  <meta property="og:title" content="{{ page_title }} - {{ config.site_name }}" />
+  <meta property="og:title" content="{{ social_title }}" />
   <meta property="og:description" content="{{ page_desc }}" />
+  <meta property="og:site_name" content="{{ config.site_name }}" />
   <meta property="og:locale" content="zh_TW" />
   {% if page and page.canonical_url %}
     <meta property="og:url" content="{{ page.canonical_url }}" />
   {% endif %}
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="{{ og_type }}" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{{ page_title }} - {{ config.site_name }}" />
+  <meta name="twitter:title" content="{{ social_title }}" />
   <meta name="twitter:description" content="{{ page_desc }}" />
 {% endblock %}
