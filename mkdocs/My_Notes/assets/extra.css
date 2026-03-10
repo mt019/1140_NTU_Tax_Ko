@@ -71,14 +71,6 @@
   padding: 0.45rem 0.25rem 0.6rem;
 }
 
-.md-sidebar--primary {
-  width: 15.2rem;
-}
-
-.md-sidebar--secondary {
-  width: 13rem;
-}
-
 /* 左側導覽更像 GitBook */
 .md-nav--primary .md-nav__title {
   display: none;
@@ -107,10 +99,8 @@
 }
 
 .md-nav--primary .md-nav__item--section > .md-nav__link {
-  font-size: 0.74rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  opacity: 0.8;
+  font-size: 0.82rem;
+  opacity: 0.86;
 }
 
 /* 右側 TOC 精緻化 */
@@ -250,5 +240,26 @@
     box-shadow: none;
     border-left: 0;
     border-right: 0;
+  }
+
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-sidebar--secondary .md-sidebar__inner {
+    background: transparent;
+    border: 0;
+  }
+
+  .md-sidebar--primary .md-nav,
+  .md-sidebar--secondary .md-nav {
+    padding: 0.15rem 0 0.5rem;
+  }
+
+  .md-nav--primary .md-nav__link {
+    padding: 0.32rem 0.2rem;
+    border-radius: 8px;
+  }
+
+  .md-nav__toggle-all {
+    margin: 0.35rem 0 0.75rem;
+    width: auto;
   }
 }
