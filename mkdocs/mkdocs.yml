@@ -24,13 +24,12 @@ theme:
     text: Noto Sans CJK TC
     code: JetBrains Mono
 plugins:
+  - awesome-pages
   - course_merge
   - search:
       lang:
         - zh
-      prebuild_index: true
   - heading_index
-  - awesome-pages
   # Notebook 顯示策略：
   # 1) 完全不轉換/不顯示：保持 mkdocs-jupyter 註解 + 排除 notebooks/**。
   # 2) 仍可轉換但不顯示於導覽：啟用 mkdocs-jupyter，並在 nav/awesome-pages 規則中隱藏。
