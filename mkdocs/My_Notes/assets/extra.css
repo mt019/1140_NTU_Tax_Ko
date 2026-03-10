@@ -2,6 +2,9 @@
   --md-primary-fg-color: #de5871cb;       /* 粉红（hotpink） */
   --md-accent-fg-color: #5a5a5a;        /* 优雅深灰 */
   --md-default-bg-color: #fff0f5;       /* 淡粉底色 (lavenderblush) */
+  --gitbook-surface: rgba(255, 255, 255, 0.72);
+  --gitbook-border: rgba(90, 90, 90, 0.12);
+  --gitbook-shadow: 0 10px 30px rgba(70, 40, 48, 0.08);
 }
 
 /* 滚动条自定义 */
@@ -21,6 +24,159 @@
 
 /* 讓右側 TOC 的滾動更順暢 */
 .md-sidebar--secondary .md-sidebar__scrollwrap { scroll-behavior: smooth; }
+
+/* GitBook 風格：整體密度與留白 */
+.md-main__inner {
+  margin-top: 1.2rem;
+}
+
+.md-content {
+  max-width: 52rem;
+}
+
+.md-content__inner {
+  margin: 0 auto;
+  padding-top: 0.8rem;
+}
+
+.md-grid {
+  max-width: 88rem;
+}
+
+/* GitBook 風格：頂欄更輕 */
+.md-header {
+  backdrop-filter: saturate(180%) blur(14px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 24px rgba(80, 40, 55, 0.12);
+}
+
+.md-search__form {
+  border-radius: 12px;
+}
+
+/* GitBook 風格：左右側欄像卡片 */
+.md-sidebar__scrollwrap {
+  padding-top: 0.35rem;
+}
+
+.md-sidebar--primary .md-sidebar__inner,
+.md-sidebar--secondary .md-sidebar__inner {
+  background: var(--gitbook-surface);
+  border: 1px solid var(--gitbook-border);
+  border-radius: 16px;
+  box-shadow: var(--gitbook-shadow);
+}
+
+.md-sidebar--primary .md-nav,
+.md-sidebar--secondary .md-nav {
+  padding: 0.45rem 0.25rem 0.6rem;
+}
+
+.md-sidebar--primary {
+  width: 15.2rem;
+}
+
+.md-sidebar--secondary {
+  width: 13rem;
+}
+
+/* 左側導覽更像 GitBook */
+.md-nav--primary .md-nav__title {
+  display: none;
+}
+
+.md-nav--primary .md-nav__item {
+  margin: 0.08rem 0;
+}
+
+.md-nav--primary .md-nav__link {
+  margin: 0;
+  padding: 0.42rem 0.7rem;
+  border-radius: 10px;
+  transition: background-color 120ms ease, color 120ms ease, transform 120ms ease;
+}
+
+.md-nav--primary .md-nav__link:hover {
+  background: rgba(222, 88, 113, 0.08);
+  transform: translateX(1px);
+}
+
+.md-nav--primary .md-nav__link--active,
+.md-nav--primary .md-nav__item .md-nav__link--active {
+  background: rgba(222, 88, 113, 0.12);
+  font-weight: 700;
+}
+
+.md-nav--primary .md-nav__item--section > .md-nav__link {
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* 右側 TOC 精緻化 */
+.md-nav--secondary .md-nav__title {
+  padding: 0.7rem 0.9rem 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6e5560;
+}
+
+.md-nav--secondary .md-nav__link {
+  margin: 0.08rem 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-left: 2px solid transparent;
+}
+
+.md-nav--secondary .md-nav__link:hover,
+.md-nav--secondary .md-nav__link--active {
+  border-left-color: rgba(222, 88, 113, 0.7);
+  background: rgba(222, 88, 113, 0.06);
+}
+
+/* 文章區像 GitBook：白色卡片、閱讀寬度更舒服 */
+.md-typeset {
+  font-size: 0.84rem;
+  line-height: 1.78;
+}
+
+.md-typeset h1 {
+  margin-bottom: 1.3rem;
+  font-size: 2.1rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h2 {
+  margin-top: 2.6rem;
+  padding-top: 0.2rem;
+  font-size: 1.28rem;
+}
+
+.md-typeset h3 {
+  margin-top: 1.8rem;
+  font-size: 1rem;
+}
+
+.md-content__inner > article,
+.md-content__inner > .md-content__article {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--gitbook-border);
+  border-radius: 20px;
+  box-shadow: var(--gitbook-shadow);
+  padding: 1.4rem 1.7rem 2rem;
+}
+
+.md-typeset p,
+.md-typeset ul,
+.md-typeset ol {
+  margin-top: 0.85em;
+  margin-bottom: 0.85em;
+}
+
+.md-typeset hr {
+  margin: 2rem 0;
+  border-bottom-color: rgba(90, 90, 90, 0.12);
+}
 
 /* 左側導覽「小標題」切換按鈕 */
 .md-nav__toggle-all {
@@ -60,4 +216,16 @@
 .md-typeset h5,
 .md-typeset h6 {
   font-weight: 700 !important; /* 700 = 粗體 */
+}
+
+@media screen and (max-width: 76.1875em) {
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-sidebar--secondary .md-sidebar__inner,
+  .md-content__inner > article,
+  .md-content__inner > .md-content__article {
+    border-radius: 0;
+    box-shadow: none;
+    border-left: 0;
+    border-right: 0;
+  }
 }
