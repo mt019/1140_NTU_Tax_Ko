@@ -2,9 +2,6 @@
   --md-primary-fg-color: #de5871cb;       /* 粉红（hotpink） */
   --md-accent-fg-color: #5a5a5a;        /* 优雅深灰 */
   --md-default-bg-color: #fff0f5;       /* 淡粉底色 (lavenderblush) */
-  --gitbook-surface: rgba(255, 255, 255, 0.72);
-  --gitbook-border: rgba(90, 90, 90, 0.12);
-  --gitbook-shadow: 0 10px 30px rgba(70, 40, 48, 0.08);
 }
 
 /* 滚动条自定义 */
@@ -25,38 +22,19 @@
 /* 讓右側 TOC 的滾動更順暢 */
 .md-sidebar--secondary .md-sidebar__scrollwrap { scroll-behavior: smooth; }
 
-/* GitBook 風格：整體密度與留白 */
-.md-main__inner {
-  margin-top: 1.2rem;
-}
+/* 輕量版面微調 */
+.md-main__inner { margin-top: 0.8rem; }
+.md-content { max-width: 56rem; }
+.md-content__inner { margin: 0 auto; padding-top: 0.4rem; }
+.md-grid { max-width: 82rem; }
 
-.md-content {
-  max-width: 52rem;
-}
-
-.md-content__inner {
-  margin: 0 auto;
-  padding-top: 0.8rem;
-}
-
-.md-grid {
-  max-width: 88rem;
-}
-
-/* GitBook 風格：頂欄更輕 */
 .md-header {
   backdrop-filter: saturate(180%) blur(14px);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 24px rgba(80, 40, 55, 0.12);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 16px rgba(80, 40, 55, 0.1);
 }
 
-.md-search__form {
-  border-radius: 12px;
-}
-
-/* GitBook 風格：左右側欄像卡片 */
-.md-sidebar__scrollwrap {
-  padding-top: 0.35rem;
-}
+.md-search__form { border-radius: 12px; }
+.md-sidebar__scrollwrap { padding-top: 0.1rem; }
 
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary,
@@ -84,31 +62,24 @@
 
 .md-sidebar--primary .md-nav,
 .md-sidebar--secondary .md-nav {
-  padding: 0.2rem 0 0.4rem;
+  padding: 0;
 }
 
-/* 左側導覽回到接近原生 */
-.md-nav--primary .md-nav__title {
-  display: block;
-}
+.md-nav--primary .md-nav__title { display: block; }
 
-.md-nav--primary .md-nav__item {
-  margin: 0;
-}
+.md-nav--primary .md-nav__item { margin: 0; }
 
 .md-nav--primary .md-nav__link {
   margin: 0;
-  padding: 0.28rem 0;
+  padding: 0.22rem 0;
   border-radius: 0;
   transition: color 120ms ease;
   white-space: normal;
   word-break: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
-.md-nav--primary .md-nav__link:hover {
-  background: transparent;
-}
+.md-nav--primary .md-nav__link:hover { background: transparent; }
 
 .md-nav--primary .md-nav__link--active,
 .md-nav--primary .md-nav__item .md-nav__link--active {
@@ -122,39 +93,39 @@
 
 /* 右側 TOC 精緻化 */
 .md-nav--secondary .md-nav__title {
-  padding: 0.7rem 0.9rem 0.25rem;
+  padding: 0.4rem 0 0.2rem;
   font-size: 0.78rem;
   font-weight: 700;
   color: #6e5560;
 }
 
 .md-nav--secondary .md-nav__link {
-  margin: 0.08rem 0.5rem;
-  padding: 0.25rem 0.5rem;
+  margin: 0;
+  padding: 0.18rem 0 0.18rem 0.7rem;
   border-left: 2px solid transparent;
 }
 
 .md-nav--secondary .md-nav__link:hover,
 .md-nav--secondary .md-nav__link--active {
   border-left-color: rgba(222, 88, 113, 0.7);
-  background: rgba(222, 88, 113, 0.06);
+  background: rgba(222, 88, 113, 0.04);
 }
 
 /* 左側注入的小標題導覽 */
 .md-sidebar--primary .md-nav__item--alltoc > .md-nav--injected {
   display: block;
-  margin: 0.1rem 0 0.25rem;
+  margin: 0.05rem 0 0.15rem;
 }
 
 .md-sidebar--primary .md-nav__list--alltoc {
   margin-left: 0;
-  padding-left: 0.8rem;
+  padding-left: 0.7rem;
   border-left: 1px solid rgba(222, 88, 113, 0.18);
 }
 
 .md-sidebar--primary .md-nav--injected .md-nav__link {
-  padding: 0.18rem 0;
-  font-size: 0.76rem;
+  padding: 0.14rem 0;
+  font-size: 0.74rem;
   line-height: 1.35;
   color: rgba(60, 60, 60, 0.84);
 }
@@ -163,48 +134,37 @@
   background: transparent;
 }
 
-/* 文章區像 GitBook：白色卡片、閱讀寬度更舒服 */
 .md-typeset {
-  font-size: 0.84rem;
-  line-height: 1.78;
+  font-size: 0.9rem;
+  line-height: 1.75;
 }
 
 .md-typeset h1 {
-  margin-bottom: 1.3rem;
-  font-size: 2.1rem;
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
   line-height: 1.2;
-  letter-spacing: -0.01em;
 }
 
 .md-typeset h2 {
-  margin-top: 2.6rem;
+  margin-top: 2.2rem;
   padding-top: 0.2rem;
-  font-size: 1.28rem;
+  font-size: 1.2rem;
 }
 
 .md-typeset h3 {
-  margin-top: 1.8rem;
+  margin-top: 1.5rem;
   font-size: 1rem;
-}
-
-.md-content__inner > article,
-.md-content__inner > .md-content__article {
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid var(--gitbook-border);
-  border-radius: 20px;
-  box-shadow: var(--gitbook-shadow);
-  padding: 1.4rem 1.7rem 2rem;
 }
 
 .md-typeset p,
 .md-typeset ul,
 .md-typeset ol {
-  margin-top: 0.85em;
-  margin-bottom: 0.85em;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }
 
 .md-typeset hr {
-  margin: 2rem 0;
+  margin: 1.6rem 0;
   border-bottom-color: rgba(90, 90, 90, 0.12);
 }
 
@@ -249,16 +209,6 @@
 }
 
 @media screen and (max-width: 76.1875em) {
-  .md-sidebar--primary .md-sidebar__inner,
-  .md-sidebar--secondary .md-sidebar__inner,
-  .md-content__inner > article,
-  .md-content__inner > .md-content__article {
-    border-radius: 0;
-    box-shadow: none;
-    border-left: 0;
-    border-right: 0;
-  }
-
   .md-sidebar--primary .md-sidebar__inner,
   .md-sidebar--secondary .md-sidebar__inner {
     background: transparent;

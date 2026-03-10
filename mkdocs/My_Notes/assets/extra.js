@@ -1,13 +1,50 @@
 (function () {
-  // 取得右側 TOC 的可滾動容器
-  function getTocScroller() {
-    const side = document.querySelector(".md-sidebar--secondary");
+  function getScroller(sideSelector) {
+    const side = document.querySelector(sideSelector);
     if (!side) return null;
     return (
       side.querySelector(".md-sidebar__scrollwrap") ||
       side.querySelector(".md-sidebar__inner") ||
       side
     );
+  }
+
+  function getBestActiveLink(scroller) {
+    if (!scroller) return null;
+    return (
+      scroller.querySelector(".md-nav__link--active") ||
+      scroller.querySelector(".md-nav__item--active > .md-nav__link") ||
+      null
+    );
+  }
+
+  function keepActiveCentered(sideSelector, extraTop = 0) {
+    const scroller = getScroller(sideSelector);
+    const active = getBestActiveLink(scroller);
+    if (!scroller || !active) return;
+
+    const activeRect = active.getBoundingClientRect();
+    const containerRect = scroller.getBoundingClientRect();
+    const pad = 16;
+
+    const outAbove = activeRect.top < containerRect.top + pad + extraTop;
+    const outBelow = activeRect.bottom > containerRect.bottom - pad;
+    if (!outAbove && !outBelow) return;
+
+    const delta =
+      (activeRect.top - containerRect.top) -
+      (containerRect.height / 2 - activeRect.height / 2) -
+      extraTop;
+
+    scroller.scrollTo({
+      top: Math.max(0, scroller.scrollTop + delta),
+      behavior: "smooth",
+    });
+  }
+
+  // 取得右側 TOC 的可滾動容器
+  function getTocScroller() {
+    return getScroller(".md-sidebar--secondary");
   }
 
   // 取得當前 active 的 TOC 鏈接
@@ -49,6 +86,7 @@
     requestAnimationFrame(() => {
       scheduled = false;
       ensureActiveVisible();
+      keepActiveCentered(".md-sidebar--primary", 24);
     });
   }
 
@@ -57,11 +95,15 @@
 
   // 綁定：右側 TOC 結構或 active class 變化時檢查
   function bindObserver() {
-    const scroller = getTocScroller();
-    if (!scroller) return;
-    const nav = scroller.querySelector(".md-nav--secondary") || scroller;
-    const mo = new MutationObserver(schedule);
-    mo.observe(nav, { subtree: true, attributes: true, attributeFilter: ["class"] });
+    [".md-sidebar--secondary", ".md-sidebar--primary"].forEach((selector) => {
+      const scroller = getScroller(selector);
+      if (!scroller) return;
+      const nav =
+        scroller.querySelector(selector === ".md-sidebar--secondary" ? ".md-nav--secondary" : ".md-nav--primary") ||
+        scroller;
+      const mo = new MutationObserver(schedule);
+      mo.observe(nav, { subtree: true, attributes: true, attributeFilter: ["class", "hidden"] });
+    });
   }
 
   // 初次與延遲嘗試（應對 SPA 導航與延遲掛載）

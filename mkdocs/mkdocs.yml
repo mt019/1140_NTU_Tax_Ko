@@ -21,7 +21,7 @@ theme:
     - search.suggest
     - search.share
   font:
-    text: Noto Serif CJK TC
+    text: Noto Sans CJK TC
     code: JetBrains Mono
 plugins:
   - course_merge
@@ -39,7 +39,7 @@ plugins:
   - multiline_abbr
   - exclude:
       # 排除 notebooks/** 表示完全不轉換/不顯示 notebook
-      glob: ['_*/**', '*_.md', '**/*稿*.*', 'includes/**', '**/*abbreviations.md', 'notebooks/**', 'jupyter/**']
+      glob: ['_*/**', '*_.md', '**/*稿*.*', '**/不用的廢稿/**', '**/.DS_Store', 'includes/**', '**/*abbreviations.md', 'notebooks/**', 'jupyter/**']
 
 markdown_extensions:
   - toc:

@@ -9,6 +9,7 @@ FRONT_MATTER_RE = re.compile(r"\A---\n.*?\n---\n?", re.DOTALL)
 HEADING_RE = re.compile(r"^(#{1,6})(\s+.*)$", re.MULTILINE)
 FIRST_H1_RE = re.compile(r"\A\s*#\s+.+?(?:\n+|$)")
 MERGED_INCLUDE_RE = re.compile(r'^\s*--8<--\s+"[^"]*/_merged_course\.md"\s*$', re.MULTILINE)
+COURSE_NOISE_RE = re.compile(r"(整理版|整理|有缺前面|沒去|改週三|材料|短)$")
 
 
 class CourseMergePlugin(BasePlugin):
@@ -25,7 +26,13 @@ class CourseMergePlugin(BasePlugin):
                 continue
 
             week_files = sorted(
-                [path for path in course_dir.iterdir() if path.is_file() and WEEK_RE.match(path.name)]
+                [
+                    path
+                    for path in course_dir.iterdir()
+                    if path.is_file()
+                    and WEEK_RE.match(path.name)
+                    and "短" not in path.stem
+                ]
             )
             if not week_files:
                 continue
@@ -70,11 +77,15 @@ class CourseMergePlugin(BasePlugin):
                 for child in children:
                     src_uri = getattr(getattr(child, "file", None), "src_uri", None)
                     if src_uri:
-                        name = Path(src_uri).name
                         same_dir = Path(src_uri).parent == Path(index_child.file.src_uri).parent
+                        name = Path(src_uri).name
+                        if same_dir and name == "index.md":
+                            continue
                         if same_dir and WEEK_RE.match(name):
                             continue
                     filtered.append(child)
+                if hasattr(item, "url") and getattr(index_child, "url", None):
+                    item.url = index_child.url
                 item.children = filtered
 
             self._prune_course_week_pages(children)
@@ -85,8 +96,19 @@ class CourseMergePlugin(BasePlugin):
         text = FIRST_H1_RE.sub("", text, count=1).lstrip()
         text = HEADING_RE.sub(lambda m: "#" + m.group(1) + m.group(2), text)
 
-        title = path.stem.replace("-長", "").replace("_", " ")
+        title = self._clean_week_title(path.stem)
         section = [f"## {title}"]
         if text:
             section.append(text.rstrip())
         return "\n\n".join(section)
+
+    def _clean_week_title(self, stem: str) -> str:
+        stem = stem.replace("-長", "")
+        parts = stem.split("_", 1)
+        if len(parts) != 2:
+            return stem.replace("_", " ")
+
+        week_code, remainder = parts
+        remainder = COURSE_NOISE_RE.sub("", remainder).strip("-_ ")
+        remainder = re.sub(r"-(\d+)$", r"-\1", remainder)
+        return f"{week_code} {remainder}".strip()
