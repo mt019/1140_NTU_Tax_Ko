@@ -111,29 +111,6 @@
   background: rgba(222, 88, 113, 0.04);
 }
 
-/* 左側注入的小標題導覽 */
-.md-sidebar--primary .md-nav__item--alltoc > .md-nav--injected {
-  display: block;
-  margin: 0.05rem 0 0.15rem;
-}
-
-.md-sidebar--primary .md-nav__list--alltoc {
-  margin-left: 0;
-  padding-left: 0.7rem;
-  border-left: 1px solid rgba(222, 88, 113, 0.18);
-}
-
-.md-sidebar--primary .md-nav--injected .md-nav__link {
-  padding: 0.14rem 0;
-  font-size: 0.74rem;
-  line-height: 1.35;
-  color: rgba(60, 60, 60, 0.84);
-}
-
-.md-sidebar--primary .md-nav--injected .md-nav__link:hover {
-  background: transparent;
-}
-
 .md-typeset {
   font-size: 0.9rem;
   line-height: 1.75;
@@ -168,36 +145,6 @@
   border-bottom-color: rgba(90, 90, 90, 0.12);
 }
 
-/* 左側導覽「小標題」切換按鈕 */
-.md-nav__toggle-all {
-  display: block;
-  margin: 0.3rem 0 0.7rem;
-  padding: 0.35rem 0.6rem;
-  font-size: 0.8rem;
-  line-height: 1.2;
-  color: #333;
-  background: #fff7fb;
-  border: 1px solid #e2b8c6;
-  border-radius: 6px;
-  cursor: pointer;
-  position: sticky;
-  top: 0.5rem;
-  z-index: 1;
-}
-.md-nav__toggle-all:hover { background: #ffe9f2; }
-.md-nav__toggle-all[aria-pressed="true"] {
-  background: #f8d5e4;
-  border-color: #d998ad;
-}
-.md-nav__toggle-all--floating {
-  position: fixed;
-  top: 4rem;
-  left: 1rem;
-  z-index: 9999;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-
 /* 強制所有標題層級加粗 */
 .md-typeset h1,
 .md-typeset h2,
@@ -226,8 +173,4 @@
     border-radius: 0;
   }
 
-  .md-nav__toggle-all {
-    margin: 0.35rem 0 0.75rem;
-    width: auto;
-  }
 }
