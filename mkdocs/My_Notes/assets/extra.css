@@ -133,6 +133,29 @@
   background: rgba(222, 88, 113, 0.06);
 }
 
+/* 左側注入的小標題導覽 */
+.md-sidebar--primary .md-nav__item--alltoc > .md-nav--injected {
+  display: block;
+  margin: 0.15rem 0 0.4rem;
+}
+
+.md-sidebar--primary .md-nav__list--alltoc {
+  margin-left: 0.35rem;
+  padding-left: 0.6rem;
+  border-left: 1px solid rgba(222, 88, 113, 0.18);
+}
+
+.md-sidebar--primary .md-nav--injected .md-nav__link {
+  padding: 0.2rem 0.55rem;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: rgba(60, 60, 60, 0.84);
+}
+
+.md-sidebar--primary .md-nav--injected .md-nav__link:hover {
+  background: rgba(222, 88, 113, 0.05);
+}
+
 /* 文章區像 GitBook：白色卡片、閱讀寬度更舒服 */
 .md-typeset {
   font-size: 0.84rem;

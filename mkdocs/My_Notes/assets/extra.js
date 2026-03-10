@@ -249,6 +249,7 @@
         .find((value) => Array.isArray(value) && value.length) || [];
       if (!headings.length) return;
       const nav = buildInjectedNav(headings, link.href);
+      li.classList.add("md-nav__item--nested", "md-nav__item--alltoc");
       li.appendChild(nav);
       li.setAttribute("data-alltoc-injected", "1");
     });

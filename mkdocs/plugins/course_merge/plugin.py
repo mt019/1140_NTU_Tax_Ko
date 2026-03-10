@@ -47,6 +47,38 @@ class CourseMergePlugin(BasePlugin):
             return merged + "\n"
         return f"{cleaned}\n\n{merged}\n"
 
+    def on_nav(self, nav, **kwargs):
+        self._prune_course_week_pages(getattr(nav, "items", []))
+        return nav
+
+    def _prune_course_week_pages(self, items):
+        for item in items:
+            children = getattr(item, "children", None)
+            if not children:
+                continue
+
+            index_child = next(
+                (
+                    child
+                    for child in children
+                    if getattr(getattr(child, "file", None), "src_uri", None) in self.course_sections
+                ),
+                None,
+            )
+            if index_child:
+                filtered = []
+                for child in children:
+                    src_uri = getattr(getattr(child, "file", None), "src_uri", None)
+                    if src_uri:
+                        name = Path(src_uri).name
+                        same_dir = Path(src_uri).parent == Path(index_child.file.src_uri).parent
+                        if same_dir and WEEK_RE.match(name):
+                            continue
+                    filtered.append(child)
+                item.children = filtered
+
+            self._prune_course_week_pages(children)
+
     def _transform_week(self, path: Path):
         text = path.read_text(encoding="utf-8")
         text = FRONT_MATTER_RE.sub("", text, count=1)
