@@ -9,6 +9,7 @@ setup(
         "mkdocs.plugins": [
             "multiline_abbr = multiline_abbr.plugin:MultilineAbbrPlugin",
             "heading_index = heading_index.plugin:HeadingIndexPlugin",
+            "course_merge = course_merge.plugin:CourseMergePlugin",
         ]
     },
 )

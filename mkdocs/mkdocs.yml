@@ -24,6 +24,7 @@ theme:
     text: Noto Serif CJK TC
     code: JetBrains Mono
 plugins:
+  - course_merge
   - search:
       lang:
         - zh
