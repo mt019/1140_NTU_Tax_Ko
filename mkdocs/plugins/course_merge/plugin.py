@@ -64,6 +64,18 @@ class CourseMergePlugin(BasePlugin):
             if not children:
                 continue
 
+            direct_index_child = next(
+                (
+                    child
+                    for child in children
+                    if getattr(getattr(child, "file", None), "src_uri", None)
+                    and Path(child.file.src_uri).name == "index.md"
+                ),
+                None,
+            )
+            if direct_index_child and hasattr(item, "url") and getattr(direct_index_child, "url", None):
+                item.url = direct_index_child.url
+
             index_child = next(
                 (
                     child
@@ -84,8 +96,6 @@ class CourseMergePlugin(BasePlugin):
                         if same_dir and WEEK_RE.match(name):
                             continue
                     filtered.append(child)
-                if hasattr(item, "url") and getattr(index_child, "url", None):
-                    item.url = index_child.url
                 item.children = filtered
 
             self._prune_course_week_pages(children)

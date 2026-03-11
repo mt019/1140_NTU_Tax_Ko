@@ -38,7 +38,7 @@ plugins:
   - multiline_abbr
   - exclude:
       # 排除 notebooks/** 表示完全不轉換/不顯示 notebook
-      glob: ['_*/**', '*_.md', '**/*稿*.*', '**/不用的廢稿/**', '**/.DS_Store', 'includes/**', '**/*abbreviations.md', 'notebooks/**', 'jupyter/**']
+      glob: ['_老師要的其他文件/**', '_downloads_lawtmp/**', '*_.md', '**/*稿*.*', '**/不用的廢稿/**', '**/.DS_Store', 'includes/**', '**/*abbreviations.md', 'notebooks/**', 'jupyter/**']
 
 markdown_extensions:
   - toc:
