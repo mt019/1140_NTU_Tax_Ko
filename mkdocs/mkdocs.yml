@@ -37,8 +37,19 @@ plugins:
       # execute: false  # 先不在建站時執行筆記本
   - multiline_abbr
   - exclude:
-      # 排除 notebooks/** 表示完全不轉換/不顯示 notebook
-      glob: ['_老師要的其他文件/**', '_downloads_lawtmp/**', '*_.md', '**/*稿*.*', '**/不用的廢稿/**', '**/.DS_Store', 'includes/**', '**/*abbreviations.md', 'notebooks/**', 'jupyter/**']
+      # 使用大規則排除草稿與雜項資料
+      glob:
+        - '_老師要的其他文件/**'
+        - '_downloads_lawtmp/**'
+        - '*_.md'
+        - '**/*稿*.*'
+        - '**/_*/**'
+        - 'includes/**'
+        - 'notebooks/**'
+        - 'jupyter/**'
+        - '**/.DS_Store'
+        - '**/*abbreviations.md'
+        - '**/不用的廢稿/**'
 
 markdown_extensions:
   - toc:

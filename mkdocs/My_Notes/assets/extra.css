@@ -101,6 +101,20 @@
   opacity: 1;
 }
 
+/* 課程區塊下的每週頁面固定展開，避免只顯示 active 項目 */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav {
+  display: block !important;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav > .md-nav__list {
+  display: block !important;
+}
+
+.md-nav--primary .md-nav__item--section > .md-nav__toggle ~ .md-nav,
+.md-nav--primary .md-nav__item--section > input[type="checkbox"] ~ .md-nav {
+  display: block !important;
+}
+
 /* 右側 TOC 精緻化 */
 .md-sidebar--secondary {
   border-left: 1px solid rgba(110, 85, 96, 0.12);
