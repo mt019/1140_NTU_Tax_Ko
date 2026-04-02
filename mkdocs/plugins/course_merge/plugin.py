@@ -4,7 +4,8 @@ from pathlib import Path
 from mkdocs.plugins import BasePlugin
 
 
-WEEK_RE = re.compile(r"^W\d+_.+\.md$")
+# Include normal week files like W03_0310.md and make-up classes like W03補課_0314.md.
+WEEK_RE = re.compile(r"^W\d+(?:[^_]*)?_.+\.md$")
 FRONT_MATTER_RE = re.compile(r"\A---\n.*?\n---\n?", re.DOTALL)
 HEADING_RE = re.compile(r"^(#{1,6})(\s+.*)$", re.MULTILINE)
 FIRST_H1_RE = re.compile(r"\A\s*#\s+.+?(?:\n+|$)")
