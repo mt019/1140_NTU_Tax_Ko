@@ -38,7 +38,7 @@
 
     scroller.scrollTo({
       top: Math.max(0, scroller.scrollTop + delta),
-      behavior: "smooth",
+      behavior: "auto",
     });
   }
 
@@ -59,7 +59,7 @@
     );
   }
 
-  // 若 active 超出可視範圍，將其捲至中間
+  // 若 active 超出可視範圍，只把它捲回可視區，不主動置中
   function ensureActiveVisible() {
     const scroller = getTocScroller();
     const active = getActiveLink(scroller);
@@ -72,9 +72,16 @@
     const outAbove = a.top < c.top + pad;
     const outBelow = a.bottom > c.bottom - pad;
 
-    if (outAbove || outBelow) {
-      const delta = (a.top - c.top) - (c.height / 2 - a.height / 2);
-      scroller.scrollTo({ top: scroller.scrollTop + delta, behavior: "smooth" });
+    if (outAbove) {
+      scroller.scrollTo({
+        top: Math.max(0, scroller.scrollTop - ((c.top + pad) - a.top)),
+        behavior: "auto",
+      });
+    } else if (outBelow) {
+      scroller.scrollTo({
+        top: Math.max(0, scroller.scrollTop + (a.bottom - (c.bottom - pad))),
+        behavior: "auto",
+      });
     }
   }
 
@@ -89,9 +96,6 @@
       keepActiveCentered(".md-sidebar--primary", 24);
     });
   }
-
-  // 綁定：頁面滾動時檢查（Material 以 IntersectionObserver 改 active）
-  window.addEventListener("scroll", schedule, { passive: true });
 
   // 綁定：右側 TOC 結構或 active class 變化時檢查
   function bindObserver() {
