@@ -76,6 +76,14 @@ class CourseMergePlugin(BasePlugin):
             )
             if direct_index_child and hasattr(item, "url") and getattr(direct_index_child, "url", None):
                 item.url = direct_index_child.url
+                # With navigation.indexes enabled, keep the section clickable but
+                # remove the duplicate nested index entry from the visible nav.
+                item.children = [
+                    child
+                    for child in item.children
+                    if child is not direct_index_child
+                ]
+                children = item.children
 
             index_child = next(
                 (
