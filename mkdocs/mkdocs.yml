@@ -16,7 +16,7 @@ theme:
     - navigation.expand
     - navigation.tracking
     - navigation.footer        # 產生頁腳的上一頁/下一頁
-    - toc.integrate
+    - toc.follow
     - search.highlight
     - search.suggest
     - search.share
@@ -42,7 +42,7 @@ plugins:
 
 markdown_extensions:
   - toc:
-      toc_depth: "2-2"   # 只顯示到 ##（H2）
+      toc_depth: "2-4"   # 顯示到 ####，避免右側 TOC 過短或缺段
   # 支援頁面 meta（SEO / 社群卡片）
   - meta
   # 支援提示框
