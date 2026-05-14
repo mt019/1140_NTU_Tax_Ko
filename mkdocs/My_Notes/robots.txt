@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mt019.github.io/1140_NTU_Tax_Ko/sitemap.xml

@@ -4,8 +4,11 @@
 
 site_name: 柯格鐘稅法課程筆記
 site_description: 柯格鐘（台大）稅法課程與筆記整理（所得稅法、稅法重點、課堂逐字稿）
+site_url: https://mt019.github.io/1140_NTU_Tax_Ko/
 docs_dir: My_Notes
 use_directory_urls: true
+repo_url: https://github.com/mt019/1140_NTU_Tax_Ko
+repo_name: mt019/1140_NTU_Tax_Ko
 
 
 theme:
