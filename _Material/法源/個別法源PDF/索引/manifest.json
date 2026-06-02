@@ -412,6 +412,28 @@
     ]
   },
   {
+    "filename": "強制執行法.pdf",
+    "category": "法律",
+    "dest": "_Material/法源/個別法源PDF/法律/強制執行法.pdf",
+    "chosen_from": "_Material/Laws/強制執行法_官方/強制執行法_官方下載.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/Laws/強制執行法_官方/強制執行法_官方下載.pdf"
+    ]
+  },
+  {
+    "filename": "訴願法.pdf",
+    "category": "法律",
+    "dest": "_Material/法源/個別法源PDF/法律/訴願法.pdf",
+    "chosen_from": "_Material/Laws/訴願法_官方/訴願法_官方下載.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/Laws/訴願法_官方/訴願法_官方下載.pdf"
+    ]
+  },
+  {
     "filename": "財政收支劃分法.pdf",
     "category": "法律",
     "dest": "_Material/法源/個別法源PDF/法律/財政收支劃分法.pdf",
@@ -514,6 +536,72 @@
     "distinct_content_same_name": 1,
     "all_sources": [
       "_Material/1141法源/所得稅法四/香港澳門關係條例.pdf"
+    ]
+  },
+  {
+    "filename": "保險法.pdf",
+    "category": "法律",
+    "dest": "_Material/法源/個別法源PDF/法律/保險法.pdf",
+    "chosen_from": "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/保險法_官方/保險法_官方下載.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/保險法_官方/保險法_官方下載.pdf"
+    ]
+  },
+  {
+    "filename": "商業會計法.pdf",
+    "category": "法律",
+    "dest": "_Material/法源/個別法源PDF/法律/商業會計法.pdf",
+    "chosen_from": "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/商業會計法_官方/商業會計法_官方下載.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/商業會計法_官方/商業會計法_官方下載.pdf"
+    ]
+  },
+  {
+    "filename": "國家賠償法.pdf",
+    "category": "法律",
+    "dest": "_Material/法源/個別法源PDF/法律/國家賠償法.pdf",
+    "chosen_from": "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/國家賠償法_官方/國家賠償法_官方下載.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/國家賠償法_官方/國家賠償法_官方下載.pdf"
+    ]
+  },
+  {
+    "filename": "社會救助法.pdf",
+    "category": "法律",
+    "dest": "_Material/法源/個別法源PDF/法律/社會救助法.pdf",
+    "chosen_from": "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/社會救助法_官方/社會救助法_官方下載.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/法源/課程法源工作檔/1142/課_二34_所得稅法/_法源清單_全課/社會救助法_官方/社會救助法_官方下載.pdf"
+    ]
+  },
+  {
+    "filename": "行政執行法.pdf",
+    "category": "法律",
+    "dest": "_Material/法源/個別法源PDF/法律/行政執行法.pdf",
+    "chosen_from": "_Material/法源/個別法源PDF/法律/行政執行法.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/法源/個別法源PDF/法律/行政執行法.pdf"
+    ]
+  },
+  {
+    "filename": "最高行政法院109年度大字第4號裁定.pdf",
+    "category": "裁判",
+    "dest": "_Material/法源/個別法源PDF/裁判/最高行政法院109年度大字第4號裁定.pdf",
+    "chosen_from": "_Material/法源/個別法源PDF/裁判/最高行政法院109年度大字第4號裁定.pdf",
+    "source_count_same_name": 1,
+    "distinct_content_same_name": 1,
+    "all_sources": [
+      "_Material/法源/個別法源PDF/裁判/最高行政法院109年度大字第4號裁定.pdf"
     ]
   }
 ]
