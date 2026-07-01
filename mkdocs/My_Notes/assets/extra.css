@@ -4,7 +4,7 @@
   --md-default-bg-color: #fff0f5;       /* 淡粉底色 (lavenderblush) */
   --taxko-typeface: "TaxKoTypewriter", "ZhaohuaTypeWriter", "朝華打字機", "朝华打字机", "Songti TC", "Noto Serif CJK TC", serif;
   --taxko-readable-typeface: "Huiwen-mincho", "Songti TC", "Noto Serif CJK TC", serif;
-  --md-text-font-family: var(--taxko-typeface);
+  --md-text-font-family: var(--taxko-readable-typeface);
 }
 
 @font-face {
@@ -49,7 +49,7 @@ body,
 .md-nav,
 .md-header,
 .md-search {
-  font-family: var(--taxko-typeface);
+  font-family: var(--taxko-readable-typeface);
 }
 
 html.taxko-font-typewriter body,
@@ -72,17 +72,11 @@ html.taxko-font-readable {
   --md-text-font-family: var(--taxko-readable-typeface);
 }
 
-html.taxko-font-typewriter,
-html:not(.taxko-font-readable) {
+html.taxko-font-typewriter {
   --md-text-font-family: var(--taxko-typeface);
 }
 
 html.taxko-font-typewriter .md-typeset {
-  font-size: 0.95rem;
-  letter-spacing: 0;
-}
-
-html:not(.taxko-font-readable) .md-typeset {
   font-size: 0.95rem;
   letter-spacing: 0;
 }
@@ -101,11 +95,18 @@ html:not(.taxko-font-readable) .md-typeset {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.86);
   color: #59323b;
-  font-family: var(--taxko-readable-typeface);
   font-size: 0.72rem;
   line-height: 1;
   box-shadow: 0 4px 16px rgba(80, 40, 55, 0.14);
   cursor: pointer;
+}
+
+html.taxko-font-readable .taxko-font-toggle {
+  font-family: var(--taxko-typeface);
+}
+
+html.taxko-font-typewriter .taxko-font-toggle {
+  font-family: var(--taxko-readable-typeface);
 }
 
 .taxko-font-toggle:hover {
