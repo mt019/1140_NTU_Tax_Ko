@@ -16,3 +16,6 @@ venv/
 
 *.mov
 *.mp4
+
+# Local command prompts / private workflow notes
+/_Material/_命令/
