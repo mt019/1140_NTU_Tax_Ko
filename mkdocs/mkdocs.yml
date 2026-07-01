@@ -95,7 +95,6 @@ extra_javascript:
 
   # MathJax
   - assets/mathjax-config.js   # 配置（需在主程式前）
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
   # Mermaid（若使用 mermaid2 plugin 則可省略以下兩行）

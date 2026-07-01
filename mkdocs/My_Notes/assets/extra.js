@@ -1,4 +1,6 @@
 (function () {
+  document.documentElement.classList.add("copy-guard");
+
   function getScroller(sideSelector) {
     const side = document.querySelector(sideSelector);
     if (!side) return null;
@@ -125,4 +127,46 @@
 
   // Material 的即時導航事件（若啟用 navigation.instant 時更穩）
   document.addEventListener("navigation", schedule);
+})();
+
+(function () {
+  const blockedKeys = new Set(["c", "x", "p", "s", "u", "a"]);
+
+  function isEditableTarget(target) {
+    if (!target) return false;
+    const el = target.nodeType === Node.TEXT_NODE ? target.parentElement : target;
+    if (!el) return false;
+    return Boolean(
+      el.closest("input, textarea, select, [contenteditable='true'], .md-search")
+    );
+  }
+
+  function blockEvent(event) {
+    if (isEditableTarget(event.target)) return;
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  ["contextmenu", "copy", "cut", "selectstart", "dragstart"].forEach((type) => {
+    document.addEventListener(type, blockEvent, true);
+  });
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+      if (isEditableTarget(event.target)) return;
+
+      const key = event.key.toLowerCase();
+      const command = event.ctrlKey || event.metaKey;
+      const devToolsKey =
+        event.key === "F12" ||
+        (command && event.shiftKey && ["i", "j", "c"].includes(key));
+
+      if ((command && blockedKeys.has(key)) || devToolsKey) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    },
+    true
+  );
 })();
