@@ -13,7 +13,7 @@ repo_name: mt019/1140_NTU_Tax_Ko
 
 theme:
   name: material
-  language: zh
+  language: zh-TW
   custom_dir: overrides
   features:
     - navigation.sections
