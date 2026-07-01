@@ -2,7 +2,7 @@
   --md-primary-fg-color: #de5871cb;       /* 粉红（hotpink） */
   --md-accent-fg-color: #5a5a5a;        /* 优雅深灰 */
   --md-default-bg-color: #fff0f5;       /* 淡粉底色 (lavenderblush) */
-  --taxko-typeface: "TaxKoTypewriter", "XiangcuiDazijitiW35", "香萃打字机体 W35", "Songti TC", "Noto Serif CJK TC", serif;
+  --taxko-typeface: "TaxKoTypewriter", "ZhaohuaTypeWriter", "朝華打字機", "朝华打字机", "Songti TC", "Noto Serif CJK TC", serif;
   --taxko-readable-typeface: "Huiwen-mincho", "Songti TC", "Noto Serif CJK TC", serif;
   --md-text-font-family: var(--taxko-typeface);
 }
@@ -10,11 +10,11 @@
 @font-face {
   font-family: "TaxKoTypewriter";
   src:
-    local("XiangcuiDazijitiW35"),
-    local("香萃打字机体 W35"),
-    local("XiangcuiDazijitiW40"),
-    local("香萃打字机体 W40"),
-    url("fonts/xiangcui-typewriter-w35.ttf") format("truetype");
+    local("ZhaohuaTypeWriter Light"),
+    local("ZhaohuaTypeWriter"),
+    local("朝華打字機"),
+    local("朝华打字机"),
+    url("fonts/zhaohua-typewriter.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;

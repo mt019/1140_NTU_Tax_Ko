@@ -1,11 +1,13 @@
 # Web font assets
 
-xiangcui-typewriter-w35.ttf
+zhaohua-typewriter.ttf
 
-- Display name: 香萃打字機體 W35
-- Internal family names noted in the Translation font inventory: XiangcuiDazijitiW35, 香萃打字机体 W35
-- Source in local font pack: /Users/iw/Documents/NTU/1142/Translation/_Assets/fonts/categories/typewriter-ink/xiangcui-typewriter-w35.ttf
-- Upstream source recorded in the Translation font manifest: https://www.maoken.com/freefonts/22317.html
-- License recorded in the Translation font manifest: OFL-1.1
+- Display name: 朝華打字機 / 朝华打字机
+- Internal family names: ZhaohuaTypeWriter Light, ZhaohuaTypeWriter, 朝華打字機, 朝华打字机
+- Source: https://www.maoken.com/freefonts/27677.html
+- Direct package source used: https://oss.maoken.com/猫啃字体/中国大陆/朝华打字机_猫啃网.zip
+- Version: 1.000, 2026-03-16
+- Author: TerryWang / 特里王
+- License note from source page: free commercial use, copying and embedding allowed; the font file may not be sold alone or packaged for sale.
 
-This file is bundled so GitHub Pages visitors see the same default typewriter-style typography instead of depending on a locally installed font.
+This file is bundled so GitHub Pages visitors see the same default typewriter-style typography instead of depending on a locally installed font. The previous xiangcui typewriter font was removed from the current tree because it missed too many Traditional Chinese glyphs for course-note reading.
