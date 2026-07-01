@@ -130,16 +130,16 @@
 })();
 
 (function () {
-  const storageKey = "taxko-font-mode";
+  const storageKey = "taxko-font-mode-v2";
   const modes = {
     typewriter: {
       className: "taxko-font-typewriter",
-      label: "打字機",
+      label: "字體：打字機",
       title: "目前使用打字機字體，點一下切換成明體",
     },
     readable: {
       className: "taxko-font-readable",
-      label: "明體",
+      label: "字體：明體",
       title: "目前使用明體，點一下切回打字機字體",
     },
   };

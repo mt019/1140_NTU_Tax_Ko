@@ -4,16 +4,19 @@
   --md-default-bg-color: #fff0f5;       /* 淡粉底色 (lavenderblush) */
   --taxko-typeface: "TaxKoTypewriter", "XiangcuiDazijitiW35", "香萃打字机体 W35", "Songti TC", "Noto Serif CJK TC", serif;
   --taxko-readable-typeface: "Huiwen-mincho", "Songti TC", "Noto Serif CJK TC", serif;
+  --md-text-font-family: var(--taxko-typeface);
 }
 
 @font-face {
   font-family: "TaxKoTypewriter";
   src:
-    url("fonts/xiangcui-typewriter-w35.ttf") format("truetype"),
     local("XiangcuiDazijitiW35"),
     local("香萃打字机体 W35"),
     local("XiangcuiDazijitiW40"),
-    local("香萃打字机体 W40");
+    local("香萃打字机体 W40"),
+    url("fonts/xiangcui-typewriter-w35.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -41,6 +44,14 @@
 .md-content__inner { margin: 0 auto; padding-top: 0.4rem; }
 .md-grid { max-width: 92rem; }
 
+body,
+.md-typeset,
+.md-nav,
+.md-header,
+.md-search {
+  font-family: var(--taxko-typeface);
+}
+
 html.taxko-font-typewriter body,
 html.taxko-font-typewriter .md-typeset,
 html.taxko-font-typewriter .md-nav,
@@ -57,7 +68,21 @@ html.taxko-font-readable .md-search {
   font-family: var(--taxko-readable-typeface);
 }
 
+html.taxko-font-readable {
+  --md-text-font-family: var(--taxko-readable-typeface);
+}
+
+html.taxko-font-typewriter,
+html:not(.taxko-font-readable) {
+  --md-text-font-family: var(--taxko-typeface);
+}
+
 html.taxko-font-typewriter .md-typeset {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+html:not(.taxko-font-readable) .md-typeset {
   font-size: 0.95rem;
   letter-spacing: 0;
 }
