@@ -18,7 +18,6 @@ theme:
   features:
     - navigation.sections
     - navigation.indexes
-    - navigation.expand
     - navigation.tracking
     - navigation.footer        # 產生頁腳的上一頁/下一頁
     - navigation.top

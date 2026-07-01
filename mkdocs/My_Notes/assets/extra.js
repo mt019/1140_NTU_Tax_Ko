@@ -130,6 +130,44 @@
 })();
 
 (function () {
+  const courseLinks = {
+    "1121 租稅法總論": "1121/1121_租稅法總論/",
+    "1121 稅捐規避": "1121/1121_租稅規避/",
+    "114-1 租稅法總論": "1141/課_二89_租稅法總論/",
+    "114-1 所得稅法四": "1141/課_四34_所得稅法四/",
+    "114-1 稅捐規避專題": "1141/課_四89_稅捐規避專題/",
+    "114-2 所得稅法": "1142/課_二34_所得稅法/",
+    "114-2 稅法專題": "1142/課_四34_稅法專題/",
+    "114-2 所得稅法專題研究": "1142/課_四89_所得稅法專題研究/",
+  };
+
+  function getSiteRoot() {
+    const homeLink =
+      document.querySelector(".md-header .md-logo[href]") ||
+      document.querySelector(".md-nav__button.md-logo[href]") ||
+      document.querySelector(".md-nav--primary > .md-nav__list > .md-nav__item:first-child a[href]");
+    if (!homeLink) return new URL("./", window.location.href);
+    return new URL(homeLink.getAttribute("href"), window.location.href);
+  }
+
+  function normalizeLabel(link) {
+    return (link.textContent || "").replace(/\s+/g, " ").trim();
+  }
+
+  function fixCourseLinks() {
+    const root = getSiteRoot();
+    document.querySelectorAll(".md-nav--primary a.md-nav__link[href]").forEach((link) => {
+      const target = courseLinks[normalizeLabel(link)];
+      if (!target) return;
+      link.setAttribute("href", new URL(target, root).toString());
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", fixCourseLinks);
+  document.addEventListener("navigation", fixCourseLinks);
+})();
+
+(function () {
   const storageKey = "taxko-font-mode-v2";
   const modes = {
     typewriter: {
