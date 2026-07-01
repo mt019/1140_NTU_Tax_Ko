@@ -130,6 +130,63 @@
 })();
 
 (function () {
+  const storageKey = "taxko-font-mode";
+  const modes = {
+    typewriter: {
+      className: "taxko-font-typewriter",
+      label: "打字機",
+      title: "目前使用打字機字體，點一下切換成明體",
+    },
+    readable: {
+      className: "taxko-font-readable",
+      label: "明體",
+      title: "目前使用明體，點一下切回打字機字體",
+    },
+  };
+
+  function getMode() {
+    const saved = window.localStorage && localStorage.getItem(storageKey);
+    return saved === "readable" ? "readable" : "typewriter";
+  }
+
+  function setMode(mode) {
+    const html = document.documentElement;
+    html.classList.remove(modes.typewriter.className, modes.readable.className);
+    html.classList.add(modes[mode].className);
+    if (window.localStorage) localStorage.setItem(storageKey, mode);
+    updateButton(mode);
+  }
+
+  function updateButton(mode) {
+    const button = document.querySelector(".taxko-font-toggle");
+    if (!button) return;
+    button.textContent = modes[mode].label;
+    button.title = modes[mode].title;
+    button.setAttribute("aria-label", modes[mode].title);
+  }
+
+  function ensureButton() {
+    if (document.querySelector(".taxko-font-toggle")) {
+      updateButton(getMode());
+      return;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "taxko-font-toggle";
+    button.addEventListener("click", () => {
+      setMode(getMode() === "typewriter" ? "readable" : "typewriter");
+    });
+    document.body.appendChild(button);
+    updateButton(getMode());
+  }
+
+  setMode(getMode());
+  document.addEventListener("DOMContentLoaded", ensureButton);
+  document.addEventListener("navigation", ensureButton);
+})();
+
+(function () {
   const blockedKeys = new Set(["c", "x", "p", "s", "u", "a"]);
 
   function isEditableTarget(target) {

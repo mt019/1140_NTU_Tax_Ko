@@ -1,0 +1,11 @@
+# Web font assets
+
+xiangcui-typewriter-w35.ttf
+
+- Display name: 香萃打字機體 W35
+- Internal family names noted in the Translation font inventory: XiangcuiDazijitiW35, 香萃打字机体 W35
+- Source in local font pack: /Users/iw/Documents/NTU/1142/Translation/_Assets/fonts/categories/typewriter-ink/xiangcui-typewriter-w35.ttf
+- Upstream source recorded in the Translation font manifest: https://www.maoken.com/freefonts/22317.html
+- License recorded in the Translation font manifest: OFL-1.1
+
+This file is bundled so GitHub Pages visitors see the same default typewriter-style typography instead of depending on a locally installed font.

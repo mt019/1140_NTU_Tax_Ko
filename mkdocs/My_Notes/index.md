@@ -28,7 +28,7 @@ lang: "zh-Hant"
 
 <section class="course-home-intro">
   <p class="course-home-kicker">個人上課筆記</p>
-  <p class="course-home-lead">這裡放的是我自己聽課、整理、回頭查資料時用的稅法筆記。內容有逐字稿、有課後整理，也有一些後來補上的索引。方便我自己找東西，也方便同學對照課程脈絡，但它不是老師發的講義。</p>
+  <p class="course-home-lead">這裡放的是我自己聽課、整理、回頭查資料時用的稅法筆記。內容有逐字稿、有課後整理，也有一些後來補上的索引。這不是老師的講義。</p>
   <p>筆記依學期和課程分開。想找某個法條、判決字號或課堂日期，直接用頁首搜尋比較快；想順著課程讀，就從下面的學期欄位進去。</p>
 </section>
 
@@ -41,7 +41,7 @@ lang: "zh-Hant"
 <div class="course-home-grid">
   <section class="course-home-card course-home-card--current">
     <p class="course-home-term">1142</p>
-    <h2>最近在看的課</h2>
+    <h2>1142的課</h2>
     <ul>
       <li><a href="1142/課_二34_所得稅法/">週二 3-4 所得稅法</a></li>
       <li><a href="1142/課_四34_稅法專題/">週四 3-4 稅法專題</a></li>
@@ -51,7 +51,7 @@ lang: "zh-Hant"
 
   <section class="course-home-card">
     <p class="course-home-term">1141</p>
-    <h2>上一輪整理</h2>
+    <h2>1141的整理</h2>
     <ul>
       <li><a href="1141/課_二89_租稅法總論/">週二 8-9 租稅法總論</a></li>
       <li><a href="1141/課_四34_所得稅法四/">週四 3-4 所得稅法四</a></li>
@@ -61,7 +61,7 @@ lang: "zh-Hant"
 
   <section class="course-home-card">
     <p class="course-home-term">1121</p>
-    <h2>早期筆記</h2>
+    <h2>1121的筆記</h2>
     <ul>
       <li><a href="1121/1121_租稅法總論/_1121_租稅法總論_合併/">租稅法總論</a></li>
       <li><a href="1121/1121_租稅規避/">稅捐規避</a></li>

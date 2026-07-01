@@ -2,6 +2,19 @@
   --md-primary-fg-color: #de5871cb;       /* 粉红（hotpink） */
   --md-accent-fg-color: #5a5a5a;        /* 优雅深灰 */
   --md-default-bg-color: #fff0f5;       /* 淡粉底色 (lavenderblush) */
+  --taxko-typeface: "TaxKoTypewriter", "XiangcuiDazijitiW35", "香萃打字机体 W35", "Songti TC", "Noto Serif CJK TC", serif;
+  --taxko-readable-typeface: "Huiwen-mincho", "Songti TC", "Noto Serif CJK TC", serif;
+}
+
+@font-face {
+  font-family: "TaxKoTypewriter";
+  src:
+    url("fonts/xiangcui-typewriter-w35.ttf") format("truetype"),
+    local("XiangcuiDazijitiW35"),
+    local("香萃打字机体 W35"),
+    local("XiangcuiDazijitiW40"),
+    local("香萃打字机体 W40");
+  font-display: swap;
 }
 
 /* 滚动条自定义 */
@@ -27,6 +40,57 @@
 .md-content { max-width: 60rem; }
 .md-content__inner { margin: 0 auto; padding-top: 0.4rem; }
 .md-grid { max-width: 92rem; }
+
+html.taxko-font-typewriter body,
+html.taxko-font-typewriter .md-typeset,
+html.taxko-font-typewriter .md-nav,
+html.taxko-font-typewriter .md-header,
+html.taxko-font-typewriter .md-search {
+  font-family: var(--taxko-typeface);
+}
+
+html.taxko-font-readable body,
+html.taxko-font-readable .md-typeset,
+html.taxko-font-readable .md-nav,
+html.taxko-font-readable .md-header,
+html.taxko-font-readable .md-search {
+  font-family: var(--taxko-readable-typeface);
+}
+
+html.taxko-font-typewriter .md-typeset {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.taxko-font-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(110, 85, 96, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #59323b;
+  font-family: var(--taxko-readable-typeface);
+  font-size: 0.72rem;
+  line-height: 1;
+  box-shadow: 0 4px 16px rgba(80, 40, 55, 0.14);
+  cursor: pointer;
+}
+
+.taxko-font-toggle:hover {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.taxko-font-toggle:focus-visible {
+  outline: 2px solid rgba(222, 88, 113, 0.55);
+  outline-offset: 2px;
+}
 
 html.copy-guard,
 html.copy-guard body,
