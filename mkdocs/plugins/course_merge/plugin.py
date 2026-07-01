@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from urllib.parse import quote
 
 from mkdocs.plugins import BasePlugin
 
@@ -11,12 +12,14 @@ HEADING_RE = re.compile(r"^(#{1,6})(\s+.*)$", re.MULTILINE)
 FIRST_H1_RE = re.compile(r"\A\s*#\s+.+?(?:\n+|$)")
 MERGED_INCLUDE_RE = re.compile(r'^\s*--8<--\s+"[^"]*/_merged_course\.md"\s*$', re.MULTILINE)
 COURSE_NOISE_RE = re.compile(r"(整理版|整理|有缺前面|沒去|改週三|材料|短)$")
+PAGES_TITLE_RE = re.compile(r'^\s*title:\s*["\']?(.+?)["\']?\s*$', re.MULTILINE)
 
 
 class CourseMergePlugin(BasePlugin):
     def on_config(self, config):
         self.docs_dir = Path(config["docs_dir"]).resolve()
         self.course_sections = {}
+        self.course_urls_by_title = {}
 
         for course_dir in self.docs_dir.rglob("*"):
             if not course_dir.is_dir():
@@ -37,6 +40,13 @@ class CourseMergePlugin(BasePlugin):
             )
             if not week_files:
                 continue
+
+            pages_file = course_dir / ".pages"
+            if pages_file.exists():
+                title_match = PAGES_TITLE_RE.search(pages_file.read_text(encoding="utf-8"))
+                if title_match:
+                    rel_course = course_dir.resolve().relative_to(self.docs_dir).as_posix().rstrip("/")
+                    self.course_urls_by_title[title_match.group(1).strip()] = quote(f"{rel_course}/", safe="/")
 
             merged = [self._transform_week(week_file) for week_file in week_files]
             rel_index = index_file.resolve().relative_to(self.docs_dir).as_posix()
@@ -61,29 +71,13 @@ class CourseMergePlugin(BasePlugin):
 
     def _prune_course_week_pages(self, items):
         for item in items:
+            title = getattr(item, "title", None)
+            if title in self.course_urls_by_title:
+                item.url = self.course_urls_by_title[title]
+
             children = getattr(item, "children", None)
             if not children:
                 continue
-
-            direct_index_child = next(
-                (
-                    child
-                    for child in children
-                    if getattr(getattr(child, "file", None), "src_uri", None)
-                    and Path(child.file.src_uri).name == "index.md"
-                ),
-                None,
-            )
-            if direct_index_child and hasattr(item, "url") and getattr(direct_index_child, "url", None):
-                item.url = direct_index_child.url
-                # With navigation.indexes enabled, keep the section clickable but
-                # remove the duplicate nested index entry from the visible nav.
-                item.children = [
-                    child
-                    for child in item.children
-                    if child is not direct_index_child
-                ]
-                children = item.children
 
             index_child = next(
                 (
@@ -100,8 +94,6 @@ class CourseMergePlugin(BasePlugin):
                     if src_uri:
                         same_dir = Path(src_uri).parent == Path(index_child.file.src_uri).parent
                         name = Path(src_uri).name
-                        if same_dir and name == "index.md":
-                            continue
                         if same_dir and WEEK_RE.match(name):
                             continue
                     filtered.append(child)
