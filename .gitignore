@@ -11,6 +11,10 @@ venv/
 *.docx
 *.docx~
 
+# Local MkDocs build output
+/mkdocs/site/
+/site/
+
 
 
 
