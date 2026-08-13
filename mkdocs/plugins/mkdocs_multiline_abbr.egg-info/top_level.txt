@@ -1,1 +1,4 @@
+course_merge
+heading_index
 multiline_abbr
+proofread_gate

@@ -24,3 +24,11 @@ venv/
 
 # Local command prompts / private workflow notes
 /_Material/_命令/
+
+# 主題重編的中間產物（可由 scripts/ 重跑）
+/_work/
+
+# 斷點與歷史（transient，見 ~/.claude/rules/斷點續作.md）
+/.claude/CHECKPOINT*.md
+/.claude/history/
+__pycache__/

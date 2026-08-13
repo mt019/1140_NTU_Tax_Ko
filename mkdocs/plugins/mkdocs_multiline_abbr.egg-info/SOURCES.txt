@@ -1,4 +1,8 @@
 setup.py
+course_merge/__init__.py
+course_merge/plugin.py
+heading_index/__init__.py
+heading_index/plugin.py
 mkdocs_multiline_abbr.egg-info/PKG-INFO
 mkdocs_multiline_abbr.egg-info/SOURCES.txt
 mkdocs_multiline_abbr.egg-info/dependency_links.txt
@@ -6,3 +10,5 @@ mkdocs_multiline_abbr.egg-info/entry_points.txt
 mkdocs_multiline_abbr.egg-info/top_level.txt
 multiline_abbr/__init__.py
 multiline_abbr/plugin.py
+proofread_gate/__init__.py
+proofread_gate/plugin.py

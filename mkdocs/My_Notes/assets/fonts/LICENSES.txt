@@ -1,0 +1,10 @@
+# Font licenses
+
+本目錄的檔案都是子集（只含本站實際用到的字元）轉成 woff2，
+由 `scripts/subset-fonts.py` 從 `~/Documents/Font_Library` 的原始檔產生。
+內容新增生僻字後重跑該腳本即可補上。
+
+- `HuiwenMincho-subset.woff2` — Huiwen-mincho（匯文明朝體）。Public Domain / CC0。
+- `RadioNewsman.woff2` — Radio Newsman。上游未載明轉散布條款；
+  依站主指示比照 phenom-canvas 站群通用設計打包，風險由站主承擔
+  （同 my-canvas-lab `public/fonts/LICENSES.md` 的處理）。

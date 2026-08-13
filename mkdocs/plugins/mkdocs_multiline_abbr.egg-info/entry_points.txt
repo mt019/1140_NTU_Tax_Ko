@@ -1,2 +1,5 @@
 [mkdocs.plugins]
+course_merge = course_merge.plugin:CourseMergePlugin
+heading_index = heading_index.plugin:HeadingIndexPlugin
 multiline_abbr = multiline_abbr.plugin:MultilineAbbrPlugin
+proofread_gate = proofread_gate.plugin:ProofreadGatePlugin

@@ -20,6 +20,9 @@ class CourseMergePlugin(BasePlugin):
         self.docs_dir = Path(config["docs_dir"]).resolve()
         self.course_sections = {}
         self.course_urls_by_title = {}
+        # 被併進課程首頁的週次單頁。頁面照樣建（舊網址不斷），但排除出搜尋索引，
+        # 不然同一段內容在索引裡出現兩次，搜尋結果還會落在導覽裡已經沒有的孤兒頁。
+        self.merged_week_uris = set()
 
         for course_dir in self.docs_dir.rglob("*"):
             if not course_dir.is_dir():
@@ -51,11 +54,18 @@ class CourseMergePlugin(BasePlugin):
             merged = [self._transform_week(week_file) for week_file in week_files]
             rel_index = index_file.resolve().relative_to(self.docs_dir).as_posix()
             self.course_sections[rel_index] = "\n\n---\n\n".join(filter(None, merged)).strip()
+            for week_file in week_files:
+                self.merged_week_uris.add(
+                    week_file.resolve().relative_to(self.docs_dir).as_posix()
+                )
 
         return config
 
     def on_page_markdown(self, markdown, page, **kwargs):
         src_uri = getattr(page.file, "src_uri", "")
+        if src_uri in self.merged_week_uris:
+            page.meta.setdefault("search", {})["exclude"] = True
+
         merged = self.course_sections.get(src_uri)
         if not merged:
             return markdown

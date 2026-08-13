@@ -2,16 +2,6 @@
 
 {% block extrahead %}
   {{ super() }}
-  <script>
-    (function () {
-      try {
-        var saved = window.localStorage && localStorage.getItem("taxko-font-mode-v3");
-        document.documentElement.classList.add(saved === "typewriter" ? "taxko-font-typewriter" : "taxko-font-readable");
-      } catch (error) {
-        document.documentElement.classList.add("taxko-font-readable");
-      }
-    })();
-  </script>
   {% set page_title = (page and page.meta and page.meta.title) or (page and page.title) or config.site_name %}
   {% set is_homepage = page and page.is_homepage %}
   {% set social_title = page_title if is_homepage else page_title ~ " - " ~ config.site_name %}

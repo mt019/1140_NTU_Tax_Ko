@@ -2,20 +2,23 @@
   --md-primary-fg-color: #de5871cb;       /* 粉红（hotpink） */
   --md-accent-fg-color: #5a5a5a;        /* 优雅深灰 */
   --md-default-bg-color: #fff0f5;       /* 淡粉底色 (lavenderblush) */
-  --taxko-typeface: "TaxKoTypewriter", "ZhaohuaTypeWriter", "朝華打字機", "朝华打字机", "Songti TC", "Noto Serif CJK TC", serif;
-  --taxko-readable-typeface: "Huiwen-mincho", "Songti TC", "Noto Serif CJK TC", serif;
-  --md-text-font-family: var(--taxko-readable-typeface);
+  /* phenom 通用字體角色（同 my-canvas-lab src/index.css 現行版）：
+     正文匯文明朝；標題拉丁 Radio Newsman、CJK 落回匯文明朝。 */
+  --font-body: "Huiwen Mincho", "Huiwen-mincho", "Songti TC", "Noto Serif CJK TC", serif;
+  --font-display: "Radio Newsman", "Huiwen Mincho", "Huiwen-mincho", "Songti TC", "Noto Serif CJK TC", serif;
+  --md-text-font-family: var(--font-body);
 }
 
 @font-face {
-  font-family: "TaxKoTypewriter";
-  src:
-    local("ZhaohuaTypeWriter Light"),
-    local("ZhaohuaTypeWriter"),
-    local("朝華打字機"),
-    local("朝华打字机"),
-    url("fonts/zhaohua-typewriter.ttf") format("truetype");
-  font-style: normal;
+  font-family: "Huiwen Mincho";
+  src: local("Huiwen-mincho"), url("fonts/HuiwenMincho-subset.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Radio Newsman";
+  src: local("Radio Newsman"), url("fonts/RadioNewsman.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
@@ -49,73 +52,15 @@ body,
 .md-nav,
 .md-header,
 .md-search {
-  font-family: var(--taxko-readable-typeface);
+  font-family: var(--font-body);
+  font-synthesis: none;
 }
 
-html.taxko-font-typewriter body,
-html.taxko-font-typewriter .md-typeset,
-html.taxko-font-typewriter .md-nav,
-html.taxko-font-typewriter .md-header,
-html.taxko-font-typewriter .md-search {
-  font-family: var(--taxko-typeface);
-}
-
-html.taxko-font-readable body,
-html.taxko-font-readable .md-typeset,
-html.taxko-font-readable .md-nav,
-html.taxko-font-readable .md-header,
-html.taxko-font-readable .md-search {
-  font-family: var(--taxko-readable-typeface);
-}
-
-html.taxko-font-readable {
-  --md-text-font-family: var(--taxko-readable-typeface);
-}
-
-html.taxko-font-typewriter {
-  --md-text-font-family: var(--taxko-typeface);
-}
-
-html.taxko-font-typewriter .md-typeset {
-  font-size: 0.95rem;
-  letter-spacing: 0;
-}
-
-.taxko-font-toggle {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 6;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  min-height: 2rem;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid rgba(110, 85, 96, 0.22);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.86);
-  color: #59323b;
-  font-size: 0.72rem;
-  line-height: 1;
-  box-shadow: 0 4px 16px rgba(80, 40, 55, 0.14);
-  cursor: pointer;
-}
-
-html.taxko-font-readable .taxko-font-toggle {
-  font-family: var(--taxko-typeface);
-}
-
-html.taxko-font-typewriter .taxko-font-toggle {
-  font-family: var(--taxko-readable-typeface);
-}
-
-.taxko-font-toggle:hover {
-  background: rgba(255, 255, 255, 0.96);
-}
-
-.taxko-font-toggle:focus-visible {
-  outline: 2px solid rgba(222, 88, 113, 0.55);
-  outline-offset: 2px;
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-header__topic {
+  font-family: var(--font-display);
 }
 
 html.copy-guard,
@@ -189,8 +134,6 @@ html.copy-guard a {
 .md-sidebar--secondary .md-nav {
   padding: 0;
 }
-
-.md-nav--primary .md-nav__title { display: block; }
 
 .md-nav--primary .md-nav__item { margin: 0; }
 
