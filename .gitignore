@@ -32,3 +32,6 @@ venv/
 /.claude/CHECKPOINT*.md
 /.claude/history/
 __pycache__/
+
+# .claude 是指向 iCloud 的 symlink（本機工作狀態，不進公開倉）
+/.claude
