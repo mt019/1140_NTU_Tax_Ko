@@ -30,6 +30,11 @@ import sys
 import time
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from importlib import import_module
+# 檔名帶連字號，不能直接 import；同一張表也給 normalize-glyphs.py 的 --check 用。
+normalize_glyphs = import_module("normalize-glyphs").normalize_glyphs
+
 try:
     import opencc
     _S2T = opencc.OpenCC("s2twp")
@@ -216,6 +221,8 @@ def process(src_path: Path, work_dir: Path, prompt: str) -> Path:
     text = srt_to_raw_transcript(srt_path, plain, regex_rules)
     if _S2T is not None:
         text = _S2T.convert(text)
+    # opencc 把「説」「麽」「爲」當成繁體放過，這一步收回通用形（見 normalize-glyphs.py）。
+    text = normalize_glyphs(text)
     part_txt = Path(str(txt_path) + ".part")
     part_txt.write_text(text, encoding="utf-8")
     part_txt.rename(txt_path)
