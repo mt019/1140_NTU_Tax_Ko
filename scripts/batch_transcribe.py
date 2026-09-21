@@ -37,7 +37,9 @@ normalize_glyphs = import_module("normalize-glyphs").normalize_glyphs
 
 try:
     import opencc
-    _S2T = opencc.OpenCC("s2twp")
+    # s2tw 只做字形；s2twp 另帶一層台灣用詞替換，法律語料上改壞的比改對的多
+    # （2026-09-21 實測：程序→程式、通過→透過、設置→設定、文件→檔案）。
+    _S2T = opencc.OpenCC("s2tw")
 except ImportError:
     _S2T = None
     print(
