@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
+{% macro new_url(src_uri) -%}
+  {%- set new_base = "https://tax.phenomcanvas.com/" -%}
+  {%- set name = src_uri.split('/')[-1] if src_uri else "" -%}
+  {%- set dir = src_uri[:-(name|length)] if src_uri else "" -%}
+  {%- if not src_uri or src_uri == "404.md" -%}
+  {%- elif name == "index.md" -%}{{ new_base ~ (dir | urlencode) }}
+  {%- elif name[:1] == "W" and name[1:2] in ["0","1","2","3","4","5","6","7","8","9"] -%}{{ new_base ~ (dir | urlencode) }}
+  {%- else -%}{{ new_base ~ ((dir ~ name[:-3] ~ "/") | urlencode) }}
+  {%- endif -%}
+{%- endmacro %}
+
+{#- 主題的 site_meta 自帶一行指本站的 canonical 與一行 description，與 extrahead 印的重複；
+    同頁兩個 canonical 互相矛盾時搜尋引擎兩個都不採。這裡只留其餘幾行，兩者由 extrahead 印。 -#}
+{% block site_meta %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  {% if page.previous_page %}
+    <link rel="prev" href="{{ page.previous_page.url | url }}">
+  {% endif %}
+  {% if page.next_page %}
+    <link rel="next" href="{{ page.next_page.url | url }}">
+  {% endif %}
+  <link rel="icon" href="{{ config.theme.favicon | url }}">
+{% endblock %}
+
+{% block announce %}
+  {% set target = new_url(page.file.src_uri if page and page.file else "") %}
+  本站筆記已改在 <a href="{{ target or 'https://tax.phenomcanvas.com/' }}">tax.phenomcanvas.com</a> 更新{% if target %}，<a href="{{ target }}">本頁的新網址</a>{% endif %}。
+{% endblock %}
+
 {% block extrahead %}
   {{ super() }}
   {% set page_title = (page and page.meta and page.meta.title) or (page and page.title) or config.site_name %}
@@ -13,6 +43,11 @@
   {% set lesson_name = path_parts[-1] if path_parts|length >= 1 else "" %}
   {% set course_name_clean = course_name | replace("課_", "") | replace("_", " ") %}
   {% set lesson_name_clean = lesson_name | replace(".md", "") | replace("_", " ") %}
+
+  {#- 正本在新站 tax.phenomcanvas.com：每頁的 canonical、og:url、hreflang、麵包屑都指新站的同一頁，
+      搜尋引擎據此把排名歸給新站；本站照常可讀。新站網址的算法與 phenom-tax-data
+      export-content.mjs 的 slug 相同：index.md 代表所在目錄，W 開頭的週次頁併進同目錄的課程頁。 -#}
+  {% set canonical_url = new_url(src_uri) or (page.canonical_url if page else "") %}
 
   {% if page and page.meta and page.meta.description %}
     {% set page_desc = page.meta.description %}
@@ -87,18 +122,18 @@
   {% endif %}
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="google-site-verification" content="HgMTZnEFg_uS3jjPeDSxhbNBA6tsFU6jG7IkWxEW6P4" />
-  {% if page and page.canonical_url %}
-    <link rel="canonical" href="{{ page.canonical_url }}" />
-    <link rel="alternate" hreflang="zh-Hant-TW" href="{{ page.canonical_url }}" />
-    <link rel="alternate" hreflang="x-default" href="{{ page.canonical_url }}" />
+  {% if canonical_url %}
+    <link rel="canonical" href="{{ canonical_url }}" />
+    <link rel="alternate" hreflang="zh-Hant-TW" href="{{ canonical_url }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}" />
   {% endif %}
 
   <meta property="og:title" content="{{ social_title }}" />
   <meta property="og:description" content="{{ page_desc }}" />
   <meta property="og:site_name" content="{{ config.site_name }}" />
   <meta property="og:locale" content="zh_TW" />
-  {% if page and page.canonical_url %}
-    <meta property="og:url" content="{{ page.canonical_url }}" />
+  {% if canonical_url %}
+    <meta property="og:url" content="{{ canonical_url }}" />
   {% endif %}
   <meta property="og:type" content="{{ og_type }}" />
 
@@ -117,8 +152,8 @@
     "publisher": {
       "@type": "Organization",
       "name": "台大柯格鐘稅法課程筆記"
-    }{% if page and page.canonical_url %},
-    "url": {{ page.canonical_url | tojson }}{% endif %}{% if not is_homepage and course_name %},
+    }{% if canonical_url %},
+    "url": {{ canonical_url | tojson }}{% endif %}{% if not is_homepage and course_name %},
     "educationalLevel": "University",
     "learningResourceType": "課程筆記",
     "about": [
@@ -130,7 +165,7 @@
   }
   </script>
 
-  {% if page and page.canonical_url and not is_homepage %}
+  {% if canonical_url and not is_homepage %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -140,25 +175,25 @@
         "@type": "ListItem",
         "position": 1,
         "name": {{ config.site_name | tojson }},
-        "item": {{ config.site_url | tojson }}
+        "item": {{ "https://tax.phenomcanvas.com/" | tojson }}
       }{% if term_name %},
       {
         "@type": "ListItem",
         "position": 2,
         "name": {{ term_name | tojson }},
-        "item": {{ (config.site_url ~ term_name ~ '/') | tojson }}
+        "item": {{ ("https://tax.phenomcanvas.com/" ~ (term_name | urlencode) ~ '/') | tojson }}
       }{% endif %}{% if course_name %},
       {
         "@type": "ListItem",
         "position": 3,
         "name": {{ course_name_clean | tojson }},
-        "item": {{ (config.site_url ~ term_name ~ '/' ~ course_name ~ '/') | tojson }}
+        "item": {{ ("https://tax.phenomcanvas.com/" ~ ((term_name ~ '/' ~ course_name) | urlencode) ~ '/') | tojson }}
       }{% endif %}{% if lesson_name and lesson_name != "index.md" %},
       {
         "@type": "ListItem",
         "position": 4,
         "name": {{ page_title | tojson }},
-        "item": {{ page.canonical_url | tojson }}
+        "item": {{ canonical_url | tojson }}
       }{% endif %}
     ]
   }
