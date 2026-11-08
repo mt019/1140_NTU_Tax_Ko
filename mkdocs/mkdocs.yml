@@ -27,6 +27,9 @@ theme:
   # 字體自帶（assets/fonts/ 的 woff2 子集，phenom 通用設計），不載 Google Fonts。
   font: false
 plugins:
+  # 上線清單：只建 上線清單.txt 列出的頁（2026-11-09 起，見 plugins/publish_lock）。
+  # 新頁上線＝站主本人在清單加一行；proofread_gate 只管已在清單內、待重審的頁。
+  - publish_lock
   - awesome-pages
   - course_merge
   # 校對中閘門：清單裡的頁建站時整頁換成「校對中」告示並退出搜尋索引；

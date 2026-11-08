@@ -24,6 +24,9 @@ class CourseMergePlugin(BasePlugin):
         # 不然同一段內容在索引裡出現兩次，搜尋結果還會落在導覽裡已經沒有的孤兒頁。
         self.merged_week_uris = set()
 
+        from publish_lock.plugin import load_publish_list
+        allowed = load_publish_list(config)
+
         for course_dir in self.docs_dir.rglob("*"):
             if not course_dir.is_dir():
                 continue
@@ -39,6 +42,8 @@ class CourseMergePlugin(BasePlugin):
                     if path.is_file()
                     and WEEK_RE.match(path.name)
                     and "短" not in path.stem
+                    # 只併上線清單內的週次頁（2026-11-09，見 plugins/publish_lock）。
+                    and path.resolve().relative_to(self.docs_dir).as_posix() in allowed
                 ]
             )
             if not week_files:

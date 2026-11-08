@@ -11,6 +11,7 @@ setup(
             "heading_index = heading_index.plugin:HeadingIndexPlugin",
             "course_merge = course_merge.plugin:CourseMergePlugin",
             "proofread_gate = proofread_gate.plugin:ProofreadGatePlugin",
+            "publish_lock = publish_lock.plugin:PublishLockPlugin",
         ]
     },
 )
